@@ -1,4 +1,9 @@
-# README
+
+<h2 align="center">Docker-based CI/CD made easy</h2>
+
+<p align="center">
+[![Build Status](https://travis-ci.com/numericube/dmake.svg?branch=master)](https://travis-ci.com/numericube/dmake)
+</p>
 
 ## dmake
 
@@ -100,4 +105,3 @@ $ pip install -e . $ pip install pytest $ python -m pytest \[--skipslow\]
 or
 
 $ make test
-
