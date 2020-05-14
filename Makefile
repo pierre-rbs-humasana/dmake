@@ -87,8 +87,8 @@ dist: clean
 	ls -l dist
 
 install: clean
-	pip install -r ./requirements.txt
-	python ./setup.py install
+	pip install .
+	#python ./setup.py install
 
 #
 # lint:
