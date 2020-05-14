@@ -5,7 +5,7 @@
 <a href="https://travis-ci.com/numericube/dmake"><img alt="Build Status" src="https://travis-ci.com/numericube/dmake.svg?branch=master"></a>
 </p>
 
-## dmake
+# dmake
 
 Dmake is the missing link between Docker and your Cloud Provider \(AWS / Azure / other\).
 
@@ -15,7 +15,7 @@ Dmake is the missing link between Docker and your Cloud Provider \(AWS / Azure /
 * Stop spending hours tuning your docker-compose configuration files
 * Collaborate with your fellow developers ensuring your environments are all the same \(ie. no more "it worked on my local machine but not on the server"\)
 
-### What can dmake do for me?
+## What can dmake do for me?
 
 Dmake is a frontend to Docker+Swarm, providing sensible defaults for usual CI/CD tasks such as:
 
@@ -31,6 +31,21 @@ We are making a few assumptions for now:
 * We use Swarm. We know this is a controversial choice but we plan to move the whole project to Kubernetes. In the meantime... ...sorry: Swarm.
 * We assume your repository is hosted on Git 🤷‍
 * Your provision configuration is stored in the 'provision/' directory by default \(customizable\)
+
+## See it in action
+
+### How to write docker-compose.yml files?
+
+Without `dmake`
+
+```...hours of fiddling, docker-compose start/stop commands with ever-growing parameters...```
+
+With `dmake`
+
+```
+$ dmake config
+```
+
 
 ## General principles
 
