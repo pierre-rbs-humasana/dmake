@@ -2,7 +2,7 @@
 <h2 align="center">Docker-based CI/CD made easy</h2>
 
 <p align="center">
-[![Build Status](https://travis-ci.com/numericube/dmake.svg?branch=master)](https://travis-ci.com/numericube/dmake)
+<a href="https://travis-ci.com/numericube/dmake"><img alt="Build Status" src="https://travis-ci.com/numericube/dmake.svg?branch=master"></a>
 </p>
 
 ## dmake
