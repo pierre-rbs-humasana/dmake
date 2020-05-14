@@ -34,6 +34,7 @@ from .base_commands import Docker_Compose
 from .base_commands import Docker_Machine
 from .base_commands import Shell
 from .base_commands import Upgrade
+from .command_registry import COMMAND_REGISTRY
 from .common import bcolors
 from .common import printc
 from .config import Config
@@ -50,6 +51,10 @@ __version__ = "TBD"
 __maintainer__ = "Pierre-Julien Grizel"
 __email__ = "pjgrizel@numericube.com"
 __status__ = "Production"
+
+# Register commands in the right order
+for cls in Config, Stack, Docker, Docker_Compose, Docker_Machine, Shell:
+    COMMAND_REGISTRY.append(cls)
 
 
 # ########################################################################## #
@@ -197,17 +202,7 @@ Manage your SWARM cluster (see what's running, inspect logs, etc). Then use ./dm
         help="Action to perform on your source tree", dest="command"
     )
     subparsers.required = True  # New in Py3, see https://stackoverflow.com/questions/22990977/why-does-this-argparse-code-behave-differently-between-python-2-and-3
-    global_items = globals().items()
-    sorted(global_items, key=lambda x: x[0])
-    for _, command in global_items:
-        # Detect what we have to include
-        if not inspect.isclass(command):
-            continue
-        if not issubclass(command, BaseCommand):
-            continue
-        if command in (BaseCommand, BaseSubCommand):
-            continue
-
+    for command in COMMAND_REGISTRY:
         # Include parser and its arguments
         command.register_parser(subparsers)
 
@@ -294,6 +289,5 @@ if __name__ == "__main__":
     # Addon:
     # import importlib
     # make = importlib.import_module("make")
-    # class bc(make.BaseCommand):
-    #     """Coucouuuuu"""
+    import pdb; pdb.set_trace()
     main()

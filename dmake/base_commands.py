@@ -21,6 +21,8 @@ import pprint
 import re
 import sys
 
+from .command_registry import command, COMMAND_REGISTRY
+
 from .common import HERE
 from .common import bcolors
 from .common import printc
@@ -50,7 +52,7 @@ def subcommand(method):
 
 
 class _BaseCommand(object):
-    """This is what commands inherit from
+    """This is what all commands inherit from
     """
 
     arguments = ()
@@ -461,6 +463,38 @@ class BaseSubCommand(BaseCommand):
 
 
 # ########################################################################## #
+# ####                    Cloud Management (generic)                    #### #
+# ########################################################################## #
+
+
+class CloudManagerCommand(LooseCommand):
+    """Abstract class of a cloud manager.
+    Override this with your own provider (AWS, Azure, ...)
+    """
+
+    def print_status(self,):
+        """Print status about your cloud manager
+        """
+        raise NotImplementedError("Please override this")
+
+    def push_image(self, image, release_tag):
+        """Push an image on your cloud manager
+        """
+        raise NotImplementedError("Please override this")
+
+    def get_image_info(self, image, tag):
+        """Return info from the given tag on the repository
+        """
+        raise NotImplementedError("Please override this")
+
+    def setup(self):
+        """Configure your cloud services."""
+        raise NotImplementedError("Please override this")
+
+
+
+
+# ########################################################################## #
 # ########################################################################## #
 # ####                                                                  #### #
 # ####                 THE ACTUAL COMMANDS START HERE                   #### #
@@ -629,33 +663,3 @@ class Shell(BaseCommand):
             )
         )
         self.system("""PS1=DOCKER /bin/bash --rcfile /tmp/provision-bash-rc""")
-
-
-# ########################################################################## #
-# ####                    Cloud Management (generic)                    #### #
-# ########################################################################## #
-
-
-class CloudManagerCommand(LooseCommand):
-    """Abstract class of a cloud manager.
-    Override this with your own provider (AWS, Azure, ...)
-    """
-
-    def print_status(self,):
-        """Print status about your cloud manager
-        """
-        raise NotImplementedError("Please override this")
-
-    def push_image(self, image, release_tag):
-        """Push an image on your cloud manager
-        """
-        raise NotImplementedError("Please override this")
-
-    def get_image_info(self, image, tag):
-        """Return info from the given tag on the repository
-        """
-        raise NotImplementedError("Please override this")
-
-    def setup(self):
-        """Configure your cloud services."""
-        raise NotImplementedError("Please override this")

@@ -1,6 +1,25 @@
 CHANGES
 =======
 
+* Fixed .md file format
+* Fixing this test
+* Make change valid with recent Docker version
+* Check container creation
+* Make error message clearer
+* Installing requirements by hand
+* Minor update to doc
+* Added CI system
+* Fixed readme
+* Fixed basic --help test
+* Wow, test pass perfectly now. Gut
+* Basic config test works now
+* Dmake config works way better now (bugfixes)
+* Pretty formatting
+* Using alternate yaml module, renamed 'setup' into 'config' to avoid confusion with default python installer script
+* Wow, we got an automatic importing of Docker configurations now (needs intensive testing but the thing is - it works out of the box)
+* Basic changes
+* Added a beautiful makefile linter
+* Added basic Makefile
 * Blackified
 * Importing inital project
 * Initial commit
