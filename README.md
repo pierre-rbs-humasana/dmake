@@ -5,8 +5,6 @@
 <a href="https://travis-ci.com/numericube/dmake"><img alt="Build Status" src="https://travis-ci.com/numericube/dmake.svg?branch=master"></a>
 </p>
 
-# dmake
-
 Dmake is the missing link between Docker and your Cloud Provider \(AWS / Azure / other\).
 
 **Dmake makes Docker and cloud-based CI/CD easy:**
@@ -36,14 +34,28 @@ We are making a few assumptions for now:
 
 ### How to write docker-compose.yml files?
 
-Without `dmake`
+Without `dmake`:
 
 ```...hours of fiddling, docker-compose start/stop commands with ever-growing parameters...```
 
-With `dmake`
+With `dmake`:
 
 ```
 $ dmake config
+```
+
+### Start a multi-environment docker-compose stack
+
+Without `dmake`:
+
+```
+$ DEPLOY_ENV=dev docker-compose -f /Users/pjgrizel/Projects/dmake/dmake/templates/docker-compose.yml -f /Users/pjgrizel/Projects/dmake/dmake/templates/docker-dev.yml start
+```
+
+With `dmake`:
+
+```
+$ dmake stack start
 ```
 
 
