@@ -51,8 +51,8 @@ clean-test:
 lint:
 	autoflake -i -r dmake
 	sh -c "isort --skip-glob=.tox --combine-star --force-single-line-imports --recursive dmake tests "
-	black dmake
 	flake8 --max-line-length=180 dmake tests
+	black dmake
 
 test:
 	tox -- --flake8
