@@ -188,21 +188,27 @@ class _BaseCommand(object):
         else:
             os.environ["PROVISION_DIR"] = ""
 
-        # No PROVISION_DIR? We drill down project until we find docker-compose.yml.
+        # No PROVISION_DIR?
+        # Then we start from current directory and go up,
+        # until we find a 'provision' directory with a 'docker-compose.yml' file inside.
+        # When we hit 'project_root_dir', we stop.
+        # If we're not on a github repo, this will stop quite soon!
         if not project_root_dir:
-            project_root_dir = self.get_project_root_dir()
-        for root, _, filenames in os.walk(project_root_dir):
-            if "docker-compose.yml" in filenames:
-                if self.verbose:
-                    printc(bcolors.INFO, "Found docker-compose in {}".format(root))
-                os.environ["PROVISION_DIR"] = root
+            project_root_dir = os.path.abspath(self.get_project_root_dir())
+        curdir = os.path.abspath(os.curdir)
+        while True:
+            provision_dir = os.path.join(curdir, "provision")
+            if not project_root_dir in curdir:
                 break
-        if os.environ.get("PROVISION_DIR"):
-            return os.environ["PROVISION_DIR"]
+            if "provision" in os.listdir(curdir):
+                # provision_dir = os.path.join(curdir, "provision")
+                if "docker-compose.yml" in os.listdir(provision_dir):
+                    break
+            curdir = os.path.split(curdir)[0]
 
         # Still no provision dir? Then, default is './provision'.
         # Warning though: this directory may not exist.
-        os.environ["PROVISION_DIR"] = os.path.join(project_root_dir, "provision")
+        os.environ["PROVISION_DIR"] = provision_dir
         return os.environ["PROVISION_DIR"]
 
     def load_environment(self, ignore=("COMPOSE_PROJECT_NAME",)):
