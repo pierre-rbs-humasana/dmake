@@ -49,13 +49,27 @@ $ dmake config
 Without `dmake`:
 
 ```
-$ DEPLOY_ENV=dev docker-compose -f /Users/pjgrizel/Projects/dmake/dmake/templates/docker-compose.yml -f /Users/pjgrizel/Projects/dmake/dmake/templates/docker-dev.yml start
+$ DEPLOY_ENV=dev docker-compose -f my-project/docker-compose.yml -f my-project/docker-dev.yml start
 ```
 
 With `dmake`:
 
 ```
 $ dmake stack start
+```
+
+### Creating a multi-environment setup (dev / test / staging / prod)
+
+```
+$ dmake setup --env=test
+$ dmake setup --env=staging
+$ dmake setup --env=prod
+```
+
+### Execute a command inside a specific container of your running stack
+
+```
+$ dmake stack exec /bin/bash
 ```
 
 
