@@ -97,3 +97,8 @@ def test_sandbox(sandbox_dir):  # noqa: F811
         "{}_dmake_test_container3_1".format(project_name),
     ):
         assert container_name not in containers
+
+
+def test_custom_dockerfile(sandbox_dir):  # noqa: F811
+    """Test if we can create an integrate a Dockerfile as a whole
+    """
