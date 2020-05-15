@@ -1,6 +1,14 @@
 CHANGES
 =======
 
+* Oops
+* Minor doc addendum
+* Fixed provision directory for subdirectories inside gits
+* Added comparisons in README
+* Give an example command
+* Proper display
+* Show build status in README
+* Fixing requirements with travis
 * Fixed #1
 * Importing inital project
 * Initial commit
