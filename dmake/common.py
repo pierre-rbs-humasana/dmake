@@ -18,6 +18,8 @@ import functools
 import os
 import pkgutil
 import weakref
+from subprocess import PIPE
+from subprocess import Popen
 
 # pylint: disable=E0401,C0301
 __author__ = ""
@@ -69,23 +71,22 @@ def system(
         expcommand = expcommand + " 2>&1"
     if verbose:
         printc(
-            bcolors.ECHO, "    [{}]$ {}".format(os.path.abspath(os.curdir), expcommand),
+            bcolors.ECHO, "    [{}]$ {}".format(os.path.abspath(os.curdir), expcommand)
         )
 
     # Execute
     if capture:
-        stream = os.popen(expcommand)
-        data = stream.read()
-        ret = stream.close()
+        subp = Popen(expcommand, shell=True, stdout=PIPE, stderr=PIPE)
+        stdout, stderr = subp.communicate()
+        ret = subp.returncode
+        data = " ".join((stdout.decode(), stderr.decode()))
     else:
         ret = os.system(expcommand)
 
     # Handle return values
     if ret and not fail_silently:
-        if not verbose:
-            printc(bcolors.ECHO, "    {}".format(expcommand))
-        printc(bcolors.FAIL, "    Command returned {}".format(ret))
         if verbose:
+            printc(bcolors.FAIL, "    Command returned {}".format(ret))
             printc(bcolors.FAIL, data)
         if raise_on_error:
             raise OSError(ret)

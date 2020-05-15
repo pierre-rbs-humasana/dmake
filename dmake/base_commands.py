@@ -93,14 +93,22 @@ class _BaseCommand(object):
         """
         if os.environ.get("TRAVIS_BRANCH"):
             return os.environ["TRAVIS_BRANCH"]
-        return (
-            os.popen(
-                r"""git -C %s branch|awk '/\*/ { print $2; }'"""
-                % (self.get_project_root_dir())
-            )
-            .read()
-            .strip()
+        ret = self.system(
+            r"""git -C %s branch|awk '/\*/ { print $2; }'"""
+            % (self.get_project_root_dir()),
+            capture=True,
+            capture_stderr=True,
+            fail_silently=True,
         )
+        return ret
+        # return (
+        #     os.popen(
+        #         r"""git -C %s branch|awk '/\*/ { print $2; }'"""
+        #         % (self.get_project_root_dir())
+        #     )
+        #     .read()
+        #     .strip()
+        # )
 
     def get_project_root_dir(self,):
         """Return root dir for this project (according to git).
@@ -109,7 +117,7 @@ class _BaseCommand(object):
         if not os.environ.get("PROJECT_ROOT_DIR"):
             try:
                 os.environ["PROJECT_ROOT_DIR"] = self.system(
-                    "git rev-parse --show-toplevel", capture=True
+                    "git rev-parse --show-toplevel", capture=True, capture_stderr=True
                 ).strip()
             except OSError:
                 os.environ["PROJECT_ROOT_DIR"] = os.path.abspath(os.path.curdir)
@@ -143,7 +151,7 @@ class _BaseCommand(object):
             printc(bcolors.INFO, "You can safely ignore previous error message")
             latest_release = "norelease"
             latest_release_commit = self.system(
-                "git rev-list --max-parents=0 HEAD", capture=True
+                "git rev-list --max-parents=0 HEAD", capture=True, capture_stderr=True
             )[:7]
 
         # Return our pretty dict
@@ -192,13 +200,13 @@ class _BaseCommand(object):
         curdir = os.path.abspath(os.curdir)
         while True:
             provision_dir = os.path.join(curdir, "provision")
-            if project_root_dir not in curdir:
-                break
             if "provision" in os.listdir(curdir):
                 # provision_dir = os.path.join(curdir, "provision")
                 if "docker-compose.yml" in os.listdir(provision_dir):
                     break
             curdir = os.path.split(curdir)[0]
+            if project_root_dir not in curdir:
+                break
 
         # Still no provision dir? Then, default is './provision'.
         # Warning though: this directory may not exist.

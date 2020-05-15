@@ -243,7 +243,7 @@ Manage your SWARM cluster (see what's running, inspect logs, etc). Then use ./dm
     os.environ["DEPLOY_ENV"] = cmd_kwargs["env"]
     try:
         os.environ["GIT_COMMIT"] = cmd_instance.system(
-            "git rev-parse HEAD", capture=True
+            "git rev-parse HEAD", capture=True, capture_stderr=True
         ).strip()
     except OSError:
         printc(
