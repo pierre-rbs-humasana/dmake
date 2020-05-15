@@ -15,6 +15,8 @@ import sys
 
 import dmake
 
+from .fixtures import sandbox_dir
+
 __author__ = ""
 __copyright__ = "Copyright 2016, NumeriCube"
 __credits__ = ["Pierre-Julien Grizel"]
@@ -45,7 +47,7 @@ def test_basic():
     assert not os.system("dmake --help")
 
 
-def test_sandbox(sandbox_dir):
+def test_sandbox(sandbox_dir):  # noqa: F811
     """Test from a sandbox
     """
     # Start a few containers

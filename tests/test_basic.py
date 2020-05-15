@@ -10,7 +10,6 @@ Test if dmake is just callable
 """
 from __future__ import unicode_literals
 
-
 import pytest
 
 import dmake
