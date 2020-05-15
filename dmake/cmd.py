@@ -193,9 +193,8 @@ Manage your SWARM cluster (see what's running, inspect logs, etc). Then use ./dm
     subparsers = parser.add_subparsers(
         help="Action to perform on your source tree", dest="command"
     )
-    subparsers.required = (
-        True
-    )  # New in Py3, see https://stackoverflow.com/questions/22990977/why-does-this-argparse-code-behave-differently-between-python-2-and-3
+    # New in Py3, see https://stackoverflow.com/questions/22990977/why-does-this-argparse-code-behave-differently-between-python-2-and-3
+    subparsers.required = True
     for command in COMMAND_REGISTRY:
         # Include parser and its arguments
         command.register_parser(subparsers)
