@@ -1,8 +1,9 @@
-# Linting, configuration, environment
-ruamel.yaml
-flake8
 black
+flake8
 pbr
 pre-commit
 pytest
+pytest-flake8
+# Linting, configuration, environment
+ruamel.yaml
 tox
