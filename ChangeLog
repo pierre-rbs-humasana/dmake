@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Fixed content type
 * fixed env
 * Preliminary work on release
 * Fixed requrirements
