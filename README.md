@@ -61,9 +61,9 @@ $ dmake stack start
 ### Creating a multi-environment setup (dev / test / staging / prod)
 
 ```
-$ dmake setup --env=test
-$ dmake setup --env=staging
-$ dmake setup --env=prod
+$ dmake config --env=test
+$ dmake config --env=staging
+$ dmake config --env=prod
 ```
 
 ### Execute a command inside a specific container of your running stack
