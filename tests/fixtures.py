@@ -8,8 +8,6 @@ Copyright (c) 2016 NumeriCube. All rights reserved.
 
 Common fixtures used for dmake tests
 """
-from __future__ import unicode_literals
-
 import contextlib
 import os
 import tempfile
@@ -49,7 +47,7 @@ def context_environ():
         for k, v in old_environ.items():
             os.environ[k] = v
         for k in os.environ.keys():
-            if not k in old_environ:
+            if k not in old_environ:
                 del os.environ[k]
 
 
@@ -76,7 +74,7 @@ def dmake_module(scope="function"):
                 # Bootstrap it
                 assert os.path.isdir(tmpdirname)
                 # import pdb; pdb.set_trace()
-                make("bootstrap", "-w", "test")
+                dmake.cmd.main("bootstrap", "-w", "test")
                 # os.system("dmake -v bootstrap -w test")
                 # assert not os.system("dmake bootstrap -w test")
 
@@ -85,6 +83,7 @@ def dmake_module(scope="function"):
 
                 # Ok, happy with this, let's proceed
                 yield tmpdirname
+
 
 @pytest.fixture
 def sandbox_dir(scope="function"):

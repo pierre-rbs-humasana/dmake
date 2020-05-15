@@ -9,16 +9,9 @@ Copyright (c) 2019 NumeriCube. All rights reserved.
 Documentation management
 """
 # Python3 rocks :)
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-import argparse
 import csv
 import os
 import re
-import textwrap
 
 from . import base_commands
 from .common import HERE

@@ -9,17 +9,9 @@ Copyright (c) 2019 NumeriCube. All rights reserved.
 Simple init of dmake-made projects
 """
 # Python3 rocks :)
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-import argparse
 import json
 import os
-import re
 import shutil
-import textwrap
 
 from ruamel.yaml import YAML
 
@@ -81,7 +73,7 @@ class Config(base_commands.BaseCommand):
         # Actually, we use env vars to make this easier
         regexps = []
         for key, value in os.environ.items():
-            regexps.append(("${}".format(key), value,))
+            regexps.append(("${}".format(key), value))
 
         # Open, read, replace
         content = f_source.read()
@@ -109,7 +101,7 @@ class Config(base_commands.BaseCommand):
             service_name: {
                 "image": image_info["RepoTags"][0],
                 "command": container_info["Config"]["Cmd"],
-                "env_file": ["./settings-common.env", "./settings-${DEPLOY_ENV}.env",],
+                "env_file": ["./settings-common.env", "./settings-${DEPLOY_ENV}.env"],
                 # "ports": container_info["NetworkSettings"]["Ports"], # XXX TODO
                 "links": [],
                 "depends_on": [],
@@ -146,15 +138,11 @@ class Config(base_commands.BaseCommand):
             compose = yaml.load(f.read())
 
         # Setup services
-        for first_level_key in (
-            "services",
-            "version",
-            "volumes",
-        ):
-            if not first_level_key in compose:
+        for first_level_key in ("services", "version", "volumes"):
+            if first_level_key not in compose:
                 compose[first_level_key] = {}
             for content_key, content_value in content.get(first_level_key, {}).items():
-                if not content_key in compose[first_level_key]:
+                if content_key not in compose[first_level_key]:
                     compose[first_level_key][content_key] = {}
                     printc(
                         bcolors.INFO,

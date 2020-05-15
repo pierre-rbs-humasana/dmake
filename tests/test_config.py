@@ -8,17 +8,12 @@ Copyright (c) 2016 NumeriCube. All rights reserved.
 
 Test if dmake is able to perform a basic config end-to-end
 """
-from __future__ import unicode_literals
-
 import contextlib
 import io
 import os
 import sys
 
 import dmake
-
-from .fixtures import dmake_module
-from .fixtures import sandbox_dir
 
 __author__ = ""
 __copyright__ = "Copyright 2016, NumeriCube"
@@ -30,16 +25,15 @@ __email__ = "pjgrizel@numericube.com"
 __status__ = "Production"
 
 
-
 @contextlib.contextmanager
 def capture_stdout():
     oldout, olderr = sys.stdout, sys.stderr
     try:
-        out=[io.StringIO(), io.StringIO()]
+        out = [io.StringIO(), io.StringIO()]
         sys.stdout, sys.stderr = out
         yield out
     finally:
-        sys.stdout,sys.stderr = oldout, olderr
+        sys.stdout, sys.stderr = oldout, olderr
         out[0] = out[0].getvalue()
         out[1] = out[1].getvalue()
 
@@ -55,9 +49,15 @@ def test_sandbox(sandbox_dir):
     """Test from a sandbox
     """
     # Start a few containers
-    assert not os.system("docker run -d --rm --name dmake_test_container1 ubuntu sleep infinity")
-    assert not os.system("docker run -d --rm --name dmake_test_container2 ubuntu sleep infinity")
-    assert not os.system("docker run -d --rm --name dmake_test_container3 ubuntu sleep infinity")
+    assert not os.system(
+        "docker run -d --rm --name dmake_test_container1 ubuntu sleep infinity"
+    )
+    assert not os.system(
+        "docker run -d --rm --name dmake_test_container2 ubuntu sleep infinity"
+    )
+    assert not os.system(
+        "docker run -d --rm --name dmake_test_container3 ubuntu sleep infinity"
+    )
 
     # Prepare our structure
     dmake.cmd.main("config")

@@ -1,5 +1,7 @@
 sudo: false
 language: python
+env:
+  COVERAGE=True
 virtualenv:
   system_site_packages: false
 python:
@@ -21,7 +23,7 @@ before_script:
   - git config --global user.name "Your Name"
 script:
   - python setup.py develop
-  - tox
+  - make test
   - |
     if [[ "$COVERAGE" == "true" ]]; then
       pre-commit install

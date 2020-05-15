@@ -11,8 +11,6 @@ https://docs.pytest.org/en/latest/example/simple.html#control-skipping-of-tests-
 """
 from __future__ import unicode_literals
 
-import pytest
-
 __author__ = ""
 __copyright__ = "Copyright 2016, NumeriCube"
 __credits__ = ["Pierre-Julien Grizel"]
@@ -21,6 +19,11 @@ __version__ = "TBD"
 __maintainer__ = "Pierre-Julien Grizel"
 __email__ = "pjgrizel@numericube.com"
 __status__ = "Production"
+
+import pytest
+
+# Force import of fixtures
+__import__("fixtures.py", globals(), locals())
 
 
 def pytest_addoption(parser):

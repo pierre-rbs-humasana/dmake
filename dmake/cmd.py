@@ -10,17 +10,7 @@ This is a Makefile-inspired python script used to build and deploy our container
 in a simple and friendly way.
 
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import argparse
-import contextlib
-import inspect
-import io
-
-# pylint: disable=E0401,C0301
 import os
 import re
 import sys
@@ -42,6 +32,8 @@ from .deploy import Deploy
 from .release import Release
 from .stack import Stack
 from .status import Status
+
+# pylint: disable=E0401,C0301
 
 __author__ = ""
 __copyright__ = "Copyright 2016, NumeriCube"
@@ -201,7 +193,9 @@ Manage your SWARM cluster (see what's running, inspect logs, etc). Then use ./dm
     subparsers = parser.add_subparsers(
         help="Action to perform on your source tree", dest="command"
     )
-    subparsers.required = True  # New in Py3, see https://stackoverflow.com/questions/22990977/why-does-this-argparse-code-behave-differently-between-python-2-and-3
+    subparsers.required = (
+        True
+    )  # New in Py3, see https://stackoverflow.com/questions/22990977/why-does-this-argparse-code-behave-differently-between-python-2-and-3
     for command in COMMAND_REGISTRY:
         # Include parser and its arguments
         command.register_parser(subparsers)
@@ -289,5 +283,4 @@ if __name__ == "__main__":
     # Addon:
     # import importlib
     # make = importlib.import_module("make")
-    import pdb; pdb.set_trace()
     main()

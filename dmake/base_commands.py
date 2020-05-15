@@ -9,11 +9,6 @@ Copyright (c) 2019 NumeriCube. All rights reserved.
 Basic commands for dmake
 """
 # Python3 rocks :)
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import argparse
 import inspect
 import os
@@ -21,8 +16,7 @@ import pprint
 import re
 import sys
 
-from .command_registry import command, COMMAND_REGISTRY
-
+from . import command_registry
 from .common import HERE
 from .common import bcolors
 from .common import printc
@@ -198,7 +192,7 @@ class _BaseCommand(object):
         curdir = os.path.abspath(os.curdir)
         while True:
             provision_dir = os.path.join(curdir, "provision")
-            if not project_root_dir in curdir:
+            if project_root_dir not in curdir:
                 break
             if "provision" in os.listdir(curdir):
                 # provision_dir = os.path.join(curdir, "provision")
@@ -496,8 +490,6 @@ class CloudManagerCommand(LooseCommand):
     def setup(self):
         """Configure your cloud services."""
         raise NotImplementedError("Please override this")
-
-
 
 
 # ########################################################################## #

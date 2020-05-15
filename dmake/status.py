@@ -9,12 +9,6 @@ Copyright (c) 2019 NumeriCube. All rights reserved.
 Status command. Big stuff.
 """
 # Python3 rocks :)
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-import distutils
 import distutils.version
 import glob
 import os
@@ -48,7 +42,7 @@ class Status(base_commands.BaseCommand):
     # See http://lists.logilab.org/pipermail/python-projects/2012-September/003261.html
     # pylint: disable=W1401
     epilog = textwrap.dedent(
-        """\
+        r"""\
         {0.TITLE}
         How to organise your stack?
         ==========================={0.ENDC}
@@ -487,7 +481,7 @@ class Status(base_commands.BaseCommand):
             ]:
                 if env_var in (True, False):
                     continue
-                if not env_var in common_vars:
+                if env_var not in common_vars:
                     printc(
                         bcolors.WARNING,
                         "Variable '{}' in settings-{}.env but not in settings-common.env".format(
@@ -592,7 +586,7 @@ class Status(base_commands.BaseCommand):
         if self.verbose:
             printc(bcolors.INFO, "Project root dir: {}".format(project_root_dir))
             printc(bcolors.INFO, "Provision dir: {}".format(provision_dir))
-            printc(bcolors.INFO, "Current branch: {}".format(self.get_git_branch()))
+            printc(bcolors.INFO, "Current branch: {}".format(git_branch))
 
         # Check paths and files
         ok = self.check_paths()
@@ -624,7 +618,7 @@ class Status(base_commands.BaseCommand):
         error = self.system(
             "docker stack ls", capture=True, capture_stderr=True, fail_silently=True
         )
-        if not "Error response" in error:
+        if "Error response" not in error:
             print()
             print("{0.TITLE}Docker Swarm Stacks{0.NONE}".format(bcolors))
             print("{0.TITLE}==================={0.NONE}".format(bcolors))
