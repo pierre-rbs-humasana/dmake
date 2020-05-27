@@ -118,13 +118,19 @@ class Stack(base_commands.BaseSubCommand):
         if not container:
             # WARNING: THIS WILL NOT WORK WELL IN SWARM MODE.
             # We'll have to perform slightly different stack operations in Swarm mode.
-            self.docker_compose("ps --services")
-            default_text = ""
+            services = self.docker_compose("ps --services", capture=True).split()
+            print("\n".join(services))
             if "MAKE_DEFAULT_SERVICE" in os.environ:
-                default_text = " [{}]".format(os.environ["MAKE_DEFAULT_SERVICE"])
-            container = input(
-                "Type service name you want to operate on{}: ".format(default_text)
-            ) or os.environ.get("MAKE_DEFAULT_SERVICE")
+                default_service = os.environ["MAKE_DEFAULT_SERVICE"]
+            else:
+                default_service = services[0]
+            default_text = " [{}]".format(default_service)
+            container = (
+                input(
+                    "Type service name you want to operate on{}: ".format(default_text)
+                )
+                or default_service
+            )
             if not container:
                 printc(
                     bcolors.FAIL,

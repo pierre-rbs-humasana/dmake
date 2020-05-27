@@ -146,3 +146,10 @@ $ pip install -e . $ pip install pytest $ python -m pytest \[--skipslow\]
 or
 
 $ make test
+
+
+## Release dmake
+
+(useful for internal folks)
+
+$

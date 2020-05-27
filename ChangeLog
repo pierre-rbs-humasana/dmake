@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+* Minor error in clean
+* Better capture management
+* Better capture management
+* Fixed make release
 * Fixed content type
 * fixed env
 * Preliminary work on release
