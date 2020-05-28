@@ -197,7 +197,7 @@ class Stack(base_commands.BaseSubCommand):
         if self.additional_args:
             os.environ["ADDITIONAL_ARGS"] = self.additional_args
         if self.rebuild:
-            append_args = "--force-recreate --build"
+            append_args = "--force-recreate --always-recreate-deps --build"
         if self.detach:
             self.docker_compose(
                 "up", "--remove-orphans --detach {}".format(append_args)
