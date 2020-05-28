@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Better handling of default container when using 'dmake stack exec'
 * Minor error in clean
 * Better capture management
 * Better capture management
