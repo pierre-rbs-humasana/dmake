@@ -153,8 +153,8 @@ Manage your SWARM cluster (see what's running, inspect logs, etc). Then use ./dm
     parser.add_argument(
         "-e",
         "--env",
-        help="Environment you're working with (default=dev)",
-        default="dev",
+        help="Environment you're working with (default=%s)" % os.environ.get("DEPLOY_ENV", "dev"),
+        default=os.environ.get("DEPLOY_ENV", "dev"),
     )
     parser.add_argument(
         "-m",
