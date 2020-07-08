@@ -45,7 +45,7 @@ __email__ = "pjgrizel@numericube.com"
 __status__ = "Production"
 
 # Register commands in the right order
-for cls in Config, Status, Stack, Docker, Docker_Compose, Docker_Machine, Shell:
+for cls in Config, Status, Stack, Docker, Docker_Compose, Docker_Machine, Shell, Release, Deploy:
     COMMAND_REGISTRY.append(cls)
 
 
