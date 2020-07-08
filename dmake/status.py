@@ -282,17 +282,19 @@ class Status(base_commands.BaseCommand):
         Getting started with Azure deployment
         =====================================
         {0.ENDC}
-        First of all: you can check AWS configuration by doing "dmake --azure status".
+        First of all: you can check Azure configuration by doing "dmake --azure status".
 
         Put the following variables in settings-common.env (or overload in settings-*.env):
 
             * {0.BOLD}AZURE_RESOURCE_GROUP{0.NONE}                  Resource group you're putting your project on. We advise same as PROJECT_NAME.
-            * {0.BOLD}AZURE_ACR_NAME{0.NONE}                        Resource group you're putting your project on. We advise same as PROJECT_NAME.
+            * {0.BOLD}AZURE_ACR_NAME{0.NONE}                        ACR (Container Registry). We advise same as PROJECT_NAME.
 
-        {0.TITLE}Login / Setup
-        -------------{0.ENDC}
+        {0.TITLE}Login / Setup / Ressource group & ACR creation
+        ---------------------------------------{0.ENDC}
 
-            1/ Install Azure client
+        On your laptop:
+
+            1/ Install Azure client locally
 
             2/ Login (will redirect to a browser): az login
 
@@ -320,15 +322,16 @@ class Status(base_commands.BaseCommand):
             {0.OKBLUE}dmake --azure --machine ${{AZURE_RESOURCE_GROUP:?}}-${{DEPLOY_ENV:?}} docker swarm init{0.NONE} # This one sometimes fail? Try again until it says your swarm is ok
 
             # (Didn't solve the Cloudstor driver issue yet :/ Don't execute those commands yet.)
+            # (But you can use Docker Swarm without these, but Docker-volumes-over-Blob volumes won't be available.)
+            # (docker volumes will use the traditional, legacy driver)
             {0.OKBLUE}dmake --machine $AZURE_RESOURCE_GROUP-$DEPLOY_ENV docker plugin install docker4x/cloudstor:18.06.1-ce-azure{0.NONE}
             {0.OKBLUE}docker plugin install --alias cloudstor:azure --grant-all-permissions docker4x/cloudstor:17.06.0-ce-azure1 CLOUD_PLATFORM=AZURE AZURE_STORAGE_ACCOUNT_KEY="$SA_KEY" AZURE_STORAGE_ACCOUNT="$SA" DEBUG=1
-
 
 
         {0.TITLE}Cluster creation (WORK IN PROGRESS)
         -----------------------------------{0.ENDC}
 
-        (advanced users only!)
+        (advanced users only! Alternatively, use Azure Portal to create nodes "by hand" and connect them to your Swarm master)
 
         docker run -ti -v /Users/pjgrizel/.ssh:/root/.ssh -v /Users/pjgrizel/.azure:/root/.azure docker4x/create-sp-azure sp-swarm-$PROJECT_NAME-preprod $AZURE_RESOURCE_GROUP francecentral
 

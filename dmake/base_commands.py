@@ -59,8 +59,11 @@ class _BaseCommand(object):
         """Basic init (register parameters).
         After that you can use eg "self.verbose" to find back stored values.
         """
+        # Load kwargs vars (command arguments)
         for name, value in kwargs.items():
             setattr(self, name, value)
+
+        # Load environment
         self.load_environment()
 
     def re_make(self, *args):
@@ -610,11 +613,18 @@ For example: dmake docker-machine " -help".
 
 class Shell(BaseCommand):
     """Run a sub-shell with all environment variables set according to your project settings
+    AND envionment.
     """
 
     def cmdrun(self,):
         """Run a shell with the proper env variables
         """
+        # Display environment we're working on
+        printc(
+            bcolors.INFO,
+            "Starting dmake in '{}' env".format(self.env),
+        )
+
         # See https://stackoverflow.com/questions/8687940/start-bash-process-with-changed-prompt-ps1
         current_swarm = self.get_current_swarm()
         if current_swarm and self.machine:
