@@ -69,14 +69,14 @@ class _BaseCommand(object):
     def re_make(self, *args):
         """Re-run the internal make command with the given (probably string) args
         """
-        from . import dmake
+        from . import cmd
 
         if self.verbose:
             printc(
                 bcolors.INFO,
                 "Re-running dmake with the following args: {}".format(args),
             )
-        dmake.make(*args)
+        cmd.main(*args)
 
     def get_today_tag(self,):
         """Compute today's tag
