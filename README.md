@@ -152,4 +152,6 @@ $ make test
 
 (useful for internal folks)
 
-$
+$ make
+$ make release
+
