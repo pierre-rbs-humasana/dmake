@@ -2,10 +2,11 @@ CHANGES
 =======
 
 * Minor doc update
+* Minor doc update
 * Implemented a 'dmake stack restart' command to restart a service, removed abort-on-exit 'feature'
 * Updated Changelog
 * Included Release and Deploy commands, wooohoooo
-* Fixed re_make internal re-entrance
+* Fixed re\_make internal re-entrance
 * Fixed a bug where environment would not be set properly with some dmake commands
 * Fixed documentation and enabled dmake status
 * Added option to FORCEEEEE re-creation of containers

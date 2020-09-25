@@ -156,3 +156,7 @@ $ make
 $ make release
 $ make dist
 
+Username is 'ncube'
+Password is in the vault ;)
+
+
