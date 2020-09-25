@@ -164,6 +164,15 @@ class Stack(base_commands.BaseSubCommand):
         return self.docker_compose("logs {}".format(container))
 
     @base_commands.subcommand
+    def restart(self,):
+        """Restart a specific service.
+        """
+        container = self.get_default_container()
+        return self.docker_compose(
+            "restart {}".format(container)
+        )
+
+    @base_commands.subcommand
     def start(self,):
         """Start your dev environment"""
         # Basic information about what to run
@@ -205,7 +214,7 @@ class Stack(base_commands.BaseSubCommand):
         else:
             self.docker_compose(
                 "up",
-                "--remove-orphans --abort-on-container-exit {}".format(append_args),
+                "--remove-orphans {}".format(append_args),
             )
 
     @base_commands.subcommand
