@@ -154,4 +154,5 @@ $ make test
 
 $ make
 $ make release
+$ make dist
 
