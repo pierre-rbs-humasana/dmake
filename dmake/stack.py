@@ -100,6 +100,12 @@ class Stack(base_commands.BaseSubCommand):
 
     exec__arguments = (
         {
+            "name": ("-T",),
+            "help": "Disable terminal interaction",
+            "action": "store_true",
+            "dest": "noterm",
+        },
+        {
             "name": ("container_command",),
             "help": "Command to pass along to the container. Put it in quotes to make sure it's treated correctly. Example: '/bin/bash'.",
             "action": "store",
@@ -146,8 +152,12 @@ class Stack(base_commands.BaseSubCommand):
         """
         container = self.get_default_container()
         printc(bcolors.DESCRIBE, "Connecting {}...".format(container))
+        if self.noterm:
+            noterm = "-T"
+        else:
+            noterm = ""
         return self.docker_compose(
-            "exec {} {}".format(container, " ".join(self.container_command))
+            "exec {} {} {}".format(noterm, container, " ".join(self.container_command))
         )
 
     @base_commands.subcommand

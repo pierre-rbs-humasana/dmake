@@ -143,6 +143,13 @@ Deploy on a SWARM cluster on a given machine (must be swarm's manager node machi
 
 Manage your SWARM cluster (see what's running, inspect logs, etc). Then use ./dmake docker* commands to manage it seamlessly
     {0.ECHO}dmake --machine <docker-machine-name> --env<my-env> shell
+
+{0.TITLE}Extending dmake
+------------------------{0.NONE}
+
+You can extend dmake by putting .py files in your 'provision' directory.
+Each .py must contain a class that extends BaseCommand
+
 """.format(
             bcolors
         ),
