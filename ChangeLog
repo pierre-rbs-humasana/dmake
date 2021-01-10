@@ -1,6 +1,8 @@
 CHANGES
 =======
 
+* Added -T on option with exec to enable dmake with cloud-base test suites
+* Easy on requirements
 * Minor doc update
 * Minor doc update
 * Implemented a 'dmake stack restart' command to restart a service, removed abort-on-exit 'feature'

@@ -112,7 +112,7 @@ class AzureManager(CloudManagerCommand):
         #     self.aws_account_id, self.aws_region, image, release_tag
         # )
         self.system("docker tag {} {}".format(image_id, image))
-        self.system("docker push {}".format(image))
+        self.system("docker push {}:{}".format(image, release_tag))
 
     def get_image_info(self, image, tag):
         """Return info from the given tag (say True if tag is on the repository)
