@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Mentionning tag on push
 * Added -T on option with exec to enable dmake with cloud-base test suites
 * Easy on requirements
 * Minor doc update

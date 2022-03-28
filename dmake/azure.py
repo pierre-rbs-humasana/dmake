@@ -149,7 +149,7 @@ class AzureManager(CloudManagerCommand):
         return registry_uri
 
     def setup(self):
-        """Configure AWS services."""
+        """Configure Azure services."""
         # General parameters
         # os.environ["AWS_DEFAULT_OUTPUT"] = "json"
 
@@ -198,4 +198,9 @@ class AzureManager(CloudManagerCommand):
         os.environ["MACHINE_DRIVER"] = "azure"
 
         # Login and we're good to go!
-        self.system("az acr login --name {}".format(os.environ["AZURE_ACR_NAME"]))
+        # If Docker is not running will (pretty much) silently ignore errors here
+        try:
+            self.system("az acr login --name {}".format(os.environ["AZURE_ACR_NAME"]))
+        except OSError as e:
+            printc(bcolors.WARNING, "Can't run 'az acr login', is your Docker running locally?")
+            printc(bcolors.INFO, "Without a local Docker, you can deploy but not release.")
