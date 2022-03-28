@@ -656,8 +656,8 @@ class Shell(BaseCommand):
         if os.path.isfile(os.path.expanduser("~/.bashrc")):
             self.system("cat ~/.bashrc > /tmp/provision-bash-rc")
         self.system(
-            """echo 'PS1="DOCKER {0.WARNING}{1}{0.ENDC}> "' >> /tmp/provision-bash-rc""".format(
-                bcolors, prompt
+            """echo 'PS1="DOCKER {0}> "' >> /tmp/provision-bash-rc""".format(
+                prompt
             )
         )
         self.system(

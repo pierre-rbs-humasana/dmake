@@ -645,7 +645,9 @@ class Status(base_commands.BaseCommand):
                     bcolors
                 )
             )
-            self.system("docker service ls")
+            self.system(
+                "docker stack ls", capture=False, capture_stderr=False, fail_silently=True
+            )
 
         # AWS stuff is precised
         if self.cloud_manager:
