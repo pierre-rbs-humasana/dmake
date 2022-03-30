@@ -36,7 +36,8 @@ __status__ = "Production"
 
 class Release(base_commands.BaseCommand):
     """Make a new release from the given source tree, ready for Continuous Integration process.
-    """
+If $DMAKE_XBUILD_PLATFORM is set (eg. linux/amd64), will cross-build for this specific patform.
+Useful if you're building from a Mac M1 to a cloud infra!"""
 
     latest = False
     arguments = (
@@ -53,9 +54,9 @@ class Release(base_commands.BaseCommand):
             "dest": "branch",
         },
         {
-            "name": ("--push",),
+            "name": ("--no-push",),
             "help": "Push to the central repository (if set)",
-            "action": "store_true",
+            "action": "store_false",
             "dest": "push",
         },
         {

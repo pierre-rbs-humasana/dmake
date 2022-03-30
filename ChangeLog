@@ -1,6 +1,8 @@
 CHANGES
 =======
 
+* Removed color because I messed up the escape settings
+* Allow --azure to work even if Docker is not running locally
 * Mentionning tag on push
 * Added -T on option with exec to enable dmake with cloud-base test suites
 * Easy on requirements

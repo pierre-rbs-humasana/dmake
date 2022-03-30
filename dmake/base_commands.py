@@ -660,9 +660,9 @@ class Shell(BaseCommand):
                 prompt
             )
         )
-        self.system(
-            """echo '{} status' >> /tmp/provision-bash-rc""".format(dmake_program)
-        )
+        # self.system(
+        #     """echo '{} status' >> /tmp/provision-bash-rc""".format(dmake_program)
+        # )
         self.system(
             """echo 'alias docker="{} docker"' >> /tmp/provision-bash-rc""".format(
                 dmake_program

@@ -200,7 +200,8 @@ class AzureManager(CloudManagerCommand):
         # Login and we're good to go!
         # If Docker is not running will (pretty much) silently ignore errors here
         try:
-            self.system("az acr login --name {}".format(os.environ["AZURE_ACR_NAME"]))
+            self.system("az acr login --name {} ".format(os.environ["AZURE_ACR_NAME"]))
         except OSError as e:
             printc(bcolors.WARNING, "Can't run 'az acr login', is your Docker running locally?")
             printc(bcolors.INFO, "Without a local Docker, you can deploy but not release.")
+            self.system("az acr login --name {} --expose-token".format(os.environ["AZURE_ACR_NAME"]))
