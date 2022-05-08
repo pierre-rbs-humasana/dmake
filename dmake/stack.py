@@ -125,15 +125,19 @@ class Stack(base_commands.BaseSubCommand):
             # WARNING: THIS WILL NOT WORK WELL IN SWARM MODE.
             # We'll have to perform slightly different stack operations in Swarm mode.
             services = self.docker_compose("ps --services", capture=True).split()
-            print("\n".join(services))
+
+            # We order alphabetically, isolate MAKE_DEFAULT_SERVICE and display a nice counter
+            services.sort()
             if "MAKE_DEFAULT_SERVICE" in os.environ:
-                default_service = os.environ["MAKE_DEFAULT_SERVICE"]
-            else:
-                default_service = services[0]
+                services.remove(os.environ["MAKE_DEFAULT_SERVICE"])
+                services.insert(0, os.environ["MAKE_DEFAULT_SERVICE"])
+            for idx, service_name in enumerate(services):
+                print(f"[{idx}] {service_name}")
+            default_service = services[0]
             default_text = " [{}]".format(default_service)
             container = (
                 input(
-                    "Type service name you want to operate on{}: ".format(default_text)
+                    "Type service name or number you want to operate on{}: ".format(default_text)
                 )
                 or default_service
             )
@@ -144,6 +148,8 @@ class Stack(base_commands.BaseSubCommand):
                 )
                 if exit_on_error:
                     exit(-1)
+            if container.isnumeric():
+                container = services[int(container)]
         return container
 
     @base_commands.subcommand
