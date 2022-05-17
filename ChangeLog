@@ -1,6 +1,8 @@
 CHANGES
 =======
 
+* Allow integers to be used for container selection
+* Removed fussy output in dmake shell
 * Removed color because I messed up the escape settings
 * Allow --azure to work even if Docker is not running locally
 * Mentionning tag on push
