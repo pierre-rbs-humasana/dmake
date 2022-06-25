@@ -84,9 +84,12 @@ class _BaseCommand(object):
         if not os.environ.get("TODAY_TAG"):
             if self.verbose:
                 print("Compute today's tag")
+            suffix = os.environ.get("TODAY_TAG_SUFFIX", None)
+            if not suffix:
+                suffix = self.get_git_branch()
             os.environ["TODAY_TAG"] = "v{}-{}".format(
                 os.popen('date "+%Y-%m-%d-%H%M%S"').read().strip(),
-                self.get_git_branch(),
+                suffix,
             )
         return os.environ["TODAY_TAG"]
 

@@ -66,6 +66,12 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
             "dest": "build",
         },
         {
+            "name": ("--no-check",),
+            "help": "Skip checking the repository",
+            "action": "store_true",
+            "dest": "no_check",
+        },
+        {
             "name": ("--create-repository",),
             "help": "Create target Docker Image repository if it doesn't exist (and if possible)",
             "action": "store_true",
@@ -166,7 +172,8 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
             exit(-1)
 
         # Check git status
-        self.check_git_status()
+        if not self.no_check:
+            self.check_git_status()
 
         # If we have create a new one, do it
         if not self.latest:
