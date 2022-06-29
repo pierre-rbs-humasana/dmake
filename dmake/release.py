@@ -89,6 +89,12 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
             "action": "store_true",
             "dest": "no_cache",
         },
+        {
+            "name": ("--no-tag",),
+            "help": "Do not git tag (useful if you just want to push Docker images without tagging in a pull request). In this case, 'latest' won't work correctly.",
+            "action": "store_true",
+            "dest": "no_tag",
+        },
     )
 
     def check_git_status(self,):
@@ -129,6 +135,7 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
         - if 'push', we push to the ECR-et-al repository
         - if 'latest' (without push nor build) we display the latest version
         - if 'latest' AND 'push', we push the latest version
+        - if 'no_tag' we skip tagging
         """
         # If we're asking for the latest tag, get it here
         # and display additional information
@@ -176,7 +183,7 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
             self.check_git_status()
 
         # If we have create a new one, do it
-        if not self.latest:
+        if not self.latest and not self.no_tag:
             self.system(
                 "git tag {}".format(release_tag), description="Tagging source code..."
             )

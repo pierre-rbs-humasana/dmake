@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Using tag suffix
 * Minor comment cleaning
 * Allow integers to be used for container selection
 * Removed fussy output in dmake shell
