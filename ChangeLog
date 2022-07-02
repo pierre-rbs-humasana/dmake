@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Tame down output in case of underlying command error
 * Updated changelog
 * Created a release --no-tag option to avoid tagging a shallow git copy
 * Using tag suffix

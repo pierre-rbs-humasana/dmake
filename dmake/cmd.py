@@ -283,9 +283,11 @@ Each .py must contain a class that extends BaseCommand
         return cmd_instance.cmdrun()
     except OSError as exc:
         printc(
-            bcolors.WARNING,
-            "The underlying command returned %s" % exc.errno,
+            bcolors.FAIL,
+            "The underlying command returned an error: %s" % (exc, )
         )
+        if not exc.errno:
+            exc.errno = exc.args[0]
         sys.exit(exc.errno)
 
 
