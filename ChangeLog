@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Updated changelog
 * Created a release --no-tag option to avoid tagging a shallow git copy
 * Using tag suffix
 * Minor comment cleaning

@@ -279,7 +279,14 @@ Each .py must contain a class that extends BaseCommand
             os.environ[sh_var] = eval(sh_value)
 
     # Execute command
-    return cmd_instance.cmdrun()
+    try:
+        return cmd_instance.cmdrun()
+    except OSError as exc:
+        printc(
+            bcolors.WARNING,
+            "The underlying command returned %s" % exc.errno,
+        )
+        sys.exit(exc.errno)
 
 
 # Let's RUUUUUN!!!
