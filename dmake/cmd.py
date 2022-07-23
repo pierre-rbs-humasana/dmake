@@ -280,17 +280,22 @@ Each .py must contain a class that extends BaseCommand
 
     # Execute command
     try:
-        return cmd_instance.cmdrun()
+        cmd_instance.cmdrun()
+        ret = 0
     except OSError as exc:
         printc(
             bcolors.FAIL,
             "The underlying command returned an error: %s" % (exc, )
         )
         if exc.errno:
-            sys.exit(exc.errno)
-        if exc.args[0]:
-            sys.exit(exc.args[0])
-        sys.exit(-1)
+            ret = exc.errno
+        elif exc.args[0]:
+            ret = exc.args[0]
+        else:
+            ret = -1
+        if not ret % 256:
+            ret = -1
+    sys.exit(ret)
 
 
 # Let's RUUUUUN!!!
@@ -300,4 +305,4 @@ if __name__ == "__main__":
     # Addon:
     # import importlib
     # make = importlib.import_module("make")
-    main()
+    sys.exit(main())

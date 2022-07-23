@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Added an option to only tag releases; better handling of error output
 * Better handling of error number return
 * Tame down output in case of underlying command error
 * Updated changelog
