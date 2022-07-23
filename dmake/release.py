@@ -66,6 +66,12 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
             "dest": "build",
         },
         {
+            "name": ("--tag-only",),
+            "help": "Only create and return the prospective tag name",
+            "action": "store_true",
+            "dest": "tag_only",
+        },
+        {
             "name": ("--no-check",),
             "help": "Skip checking the repository",
             "action": "store_true",
@@ -104,7 +110,7 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
         if self.system("""git status -uno --porcelain""", capture=True):
             printc(bcolors.FAIL, "Please commit+push your code before moving forward.")
             exit(-1)
-        self.system("git remote update")
+        self.system("git remote update", capture=True)
         local_rev = self.system("git rev-parse @", capture=True)
         remote_rev = self.system("git rev-parse @{u}", capture=True)
         base_rev = self.system("git merge-base @ @{u}", capture=True)
@@ -136,6 +142,7 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
         - if 'latest' (without push nor build) we display the latest version
         - if 'latest' AND 'push', we push the latest version
         - if 'no_tag' we skip tagging
+        - if 'tag_only' we return the tag number and that's it
         """
         # If we're asking for the latest tag, get it here
         # and display additional information
@@ -188,6 +195,11 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
                 "git tag {}".format(release_tag), description="Tagging source code..."
             )
             self.system("git push --tags", description="Pushing on source server...")
+
+        # If we're only asked to generate and push tag, stop now
+        if self.tag_only:
+            print(release_tag)
+            exit(0)
 
         # Build if necessary
         # Images are tagged automatically thanks to the DEPLOY_TAG setting.

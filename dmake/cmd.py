@@ -286,9 +286,11 @@ Each .py must contain a class that extends BaseCommand
             bcolors.FAIL,
             "The underlying command returned an error: %s" % (exc, )
         )
-        if not exc.errno:
-            exc.errno = exc.args[0]
-        sys.exit(exc.errno)
+        if exc.errno:
+            sys.exit(exc.errno)
+        if exc.args[0]:
+            sys.exit(exc.args[0])
+        sys.exit(-1)
 
 
 # Let's RUUUUUN!!!
