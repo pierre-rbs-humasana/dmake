@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Advertise changes
 * Silence azure login (maybe we've silenced it too much)
 * Fixed weird error when return value was a multiple of 256
 * Added an option to only tag releases; better handling of error output
