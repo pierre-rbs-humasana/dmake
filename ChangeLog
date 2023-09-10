@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Don't display explicit ENV values for security reason
 * Advertise changes
 * Silence azure login (maybe we've silenced it too much)
 * Fixed weird error when return value was a multiple of 256

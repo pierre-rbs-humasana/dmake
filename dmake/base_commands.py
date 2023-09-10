@@ -264,8 +264,8 @@ class _BaseCommand(object):
         # Display the resulting settings
         if self.verbose:
             added_vars = sorted(added_vars.keys())
-            for v in added_vars:
-                printc(bcolors.NONE, "{}={}".format(v, "..."))
+#            for v in added_vars:
+#                printc(bcolors.NONE, "{}={}".format(v, "..."))
             for v in ignore:
                 printc(bcolors.NONE, "Ignored {} env variable".format(v))
 
