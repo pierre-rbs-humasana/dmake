@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Silent variables now (it's kind of useless)
 * Don't display explicit ENV values for security reason
 * Advertise changes
 * Silence azure login (maybe we've silenced it too much)

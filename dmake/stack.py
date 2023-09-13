@@ -60,6 +60,12 @@ class Stack(base_commands.BaseSubCommand):
             "action": "store",
         },
         {
+            "name": ("--no-build",),
+            "help": "Prevent building, force using image (incompatible with --rebuild obviously)",
+            "dest": "nobuild",
+            "action": "store_true",
+        },
+        {
             "name": ("--rebuild",),
             "help": "Re-build your stack before starting it (takes time)",
             "dest": "rebuild",
@@ -223,6 +229,8 @@ class Stack(base_commands.BaseSubCommand):
             os.environ["ADDITIONAL_ARGS"] = self.additional_args
         if self.rebuild:
             append_args = "--force-recreate --always-recreate-deps --build"
+        if self.nobuild:
+            append_args = "--no-build"
         if self.detach:
             self.docker_compose(
                 "up", "--remove-orphans --detach {}".format(append_args)
