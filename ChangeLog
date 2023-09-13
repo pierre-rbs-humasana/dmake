@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Added the no-build option to dmake stack start
 * Silent variables now (it's kind of useless)
 * Don't display explicit ENV values for security reason
 * Advertise changes

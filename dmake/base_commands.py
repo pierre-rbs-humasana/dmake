@@ -76,7 +76,11 @@ class _BaseCommand(object):
                 bcolors.INFO,
                 "Re-running dmake with the following args: {}".format(args),
             )
-        cmd.main(*args)
+        try:
+            cmd.main(*args)
+        except SystemExit as exc:
+            if exc.code != 0:
+                raise
 
     def get_today_tag(self,):
         """Compute today's tag
