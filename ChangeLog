@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Display a few variables anyway
 * Fixed a nasty bug that prevented images to be built AND pushed at the same time
 * Added the no-build option to dmake stack start
 * Silent variables now (it's kind of useless)
