@@ -202,12 +202,6 @@ class Stack(base_commands.BaseSubCommand):
         if self.verbose:
             printc(bcolors.ENDC, "Starting dev containers.")
 
-        # Remove all trailing pyc files
-        self.system(
-            r'find "{}" -name \*.pyc -delete'.format(HERE),
-            description="Removing trailing pyc files...",
-        )
-
         # Make sure you stop before you start
         self.stop()
 
