@@ -303,4 +303,5 @@ Useful if you're building from a Mac M1 to a cloud infra!"""
                         image
                     ),
                 )
-                self.system("docker push {}:{}".format(image, release_tag))
+                log_level = self.verbose and "-l debug" or ""
+                self.system("docker {} push {}:{}".format(log_level, image, release_tag))

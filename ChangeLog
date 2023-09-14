@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Fixed syntax error in verbose
 * Display a few variables anyway
 * Display a few variables anyway
 * Fixed a nasty bug that prevented images to be built AND pushed at the same time
