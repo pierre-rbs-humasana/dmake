@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Added verbose log in docker tag
 * Fixed syntax error in verbose
 * Display a few variables anyway
 * Display a few variables anyway
