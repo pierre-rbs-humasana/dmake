@@ -216,7 +216,7 @@ Each .py must contain a class that extends BaseCommand
     if "--version" in argv:
         import pkg_resources  # part of setuptools
 
-        print(pkg_resources.require("dmake")[0].version)
+        print(pkg_resources.require("dmake-hms")[0].version)
         exit(0)
 
     # Actual parsing

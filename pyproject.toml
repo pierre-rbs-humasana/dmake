@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dmake-hms"
-version = "0.1.0"
+version = "0.1.31"
 description = "A Docker+Swarm-based CI toolset frontend"
 readme = "README.md"
 requires-python = ">=3.6"
@@ -12,7 +12,9 @@ authors = [
   {name = "NumeriCube", email = "support@numericube.com"},
 ]
 license = {text = "GPL-2"}
-dependencies = []
+dependencies = [
+  "ruamel.yaml>=0.16.10"
+]
 
 [project.urls]
 Homepage = "https://dmake.org"
@@ -24,7 +26,8 @@ BugTracker = "https://github.com/numericube/dmake"
 dmake = "dmake.cmd:main"
 
 [tool.setuptools.packages.find]
-where = ["dmake"]
+where = ["."]
+include = ["dmake"]
 
 [tool.setuptools]
 license-files = []
