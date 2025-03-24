@@ -1,6 +1,9 @@
 CHANGES
 =======
 
+* Change dash to underscore
+* It's not up to dmake to clean pyc files
+* Added verbose on push
 * Added verbose log in docker tag
 * Fixed syntax error in verbose
 * Display a few variables anyway
